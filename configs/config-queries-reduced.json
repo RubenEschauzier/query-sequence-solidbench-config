@@ -1,0 +1,229 @@
+{
+  "@context": "https://linkedsoftwaredependencies.org/bundles/npm/@rubeneschauzier/sparql-query-parameter-instantiator/^2.0.0/components/context.jsonld",
+  "@id": "urn:sparql-query-parameter-instantiator:default",
+  "@type": "QuerySequenceInstantiator",
+  "count": 20,
+  "seed": 0,
+  "sequenceGenerator": {
+    "@type": "SequenceGenerator",
+    "meanLogSequenceLength": 3,
+    "stdLogSequenceLength": 0.2,
+    "meanLogTransitionProbability": -2,
+    "stdLogTransitionProbability": 0.25,
+    "meanLogSessionLength": 1.7,
+    "stdLogSessionLength": 0.5,
+    "refinementPatternProbability": 0.1,
+    "temperature": 0.1
+  },
+  "destinationFilePath": "out-queries/",
+  "personProvider": {
+    "@type": "VariableTemplateNamedNode",
+    "name": "person",
+    "substitutionProvider": {
+      "@id": "urn:sparql-query-parameter-instantiator:substitutionProviderPerson",
+      "@type": "SubstitutionProviderCsv",
+      "csvFilePath": "out-fragments/parameters-persons.csv",
+      "columnName": "subject"
+    }
+  },
+  "providers": [
+    {
+      "@type": "QuerySequenceTemplateProvider",
+      "name": "interactive-discover-1",
+      "queryTask": "Messages Person",
+      "nextTemplates": [
+        "interactive-short-5"
+      ],
+      "instantiationVariableTypeMap": {
+        "@type": "@json",
+        "@value": {
+          "person": "person"
+        }
+      },
+      "outputVariableTypeMap": {
+        "@type": "@json",
+        "@value": {
+          "message": "message"
+        }
+      },      
+      "nextTemplateProbabilities": [
+        1
+      ],
+      "baseProbabilityTemplate": 0.4,
+      "minRefinementLength": 2,
+      "maxRefinementLength": 5,
+      "maxLogits": 5,
+      "templateFilePath": {
+        "@id": "urn:variables:query-templates:interactive-discover-1.sparql",
+        "@type": "Variable"
+      },
+      "refinementPatternsFilePath": {
+        "@id": "urn:variables:query-refinements:interactive-discover-1.json",
+        "@type": "Variable"
+      },
+      "variables": [
+        {
+          "@type": "VariableTemplateNamedNode",
+          "name": "person",
+          "valueTransformers": [
+            {
+              "@id": "urn:sparql-query-parameter-instantiator:valueTransformerCsvMapActivities",
+              "@type": "ValueTransformerCsvMap",
+              "file": "out-fragments/transformed-activities.csv"
+            }
+          ],
+          "substitutionProvider": {
+            "@id": "urn:sparql-query-parameter-instantiator:substitutionProviderPersonProbability",
+            "@type": "SubstitutionProviderCsvSimilarityBasedProbability",
+            "csvFilePath": "out-fragments/parameters-persons.csv",
+            "csvFilePathSimilarities": "out-enhanced/parameters-similarities-people.csv",
+            "columnName": "subject",
+            "columnNameSimilaritySubject": "person",
+            "separator": ";"
+          }
+        },
+        {
+          "@type": "VariableTemplateTimestamp",
+          "name": "timestamp",
+          "substitutionProvider": {
+            "@id": "urn:sparql-query-parameter-instantiator:substitutionProviderTimestamps",
+            "@type": "SubstitutionProviderCsv",
+            "csvFilePath": "out-snb/substitution_parameters/interactive_9_param.txt",
+            "separator": "|",
+            "columnName": "maxDate"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "QuerySequenceTemplateProvider",
+      "name": "interactive-discover-2",
+      "queryTask": "Messages Person",
+      "nextTemplates": [
+        "interactive-short-5"
+      ],
+      "nextTemplateProbabilities": [
+        1
+      ],
+      "instantiationVariableTypeMap": {
+        "@type": "@json",
+        "@value": {
+          "person": "person"
+        }
+      },
+      "outputVariableTypeMap": {
+        "@type": "@json",
+        "@value": {
+          "message": "message"
+        }
+      },      
+      "baseProbabilityTemplate": 0.4,
+      "minRefinementLength": 2,
+      "maxRefinementLength": 5,
+      "maxLogits": 5,
+      "templateFilePath": {
+        "@id": "urn:variables:query-templates:interactive-discover-2.sparql",
+        "@type": "Variable"
+      },
+      "refinementPatternsFilePath": {
+        "@id": "urn:variables:query-refinements:interactive-discover-2.json",
+        "@type": "Variable"
+      },
+
+      "variables": [
+        {
+          "@type": "VariableTemplateNamedNode",
+          "name": "person",
+          "valueTransformers": [
+            {
+              "@id": "urn:sparql-query-parameter-instantiator:valueTransformerCsvMapActivities"
+            }
+          ],
+          "substitutionProvider": {
+            "@id": "urn:sparql-query-parameter-instantiator:substitutionProviderPersonProbability"
+          }
+        },
+        {
+          "@type": "VariableTemplateTimestamp",
+          "name": "maxDate",
+          "substitutionProvider": {
+            "@id": "urn:sparql-query-parameter-instantiator:substitutionProviderTimestamps"
+          }
+        }
+
+      ]
+    },
+    {
+      "@type": "QuerySequenceTemplateProvider",
+      "name": "interactive-short-5",
+      "queryTask": "Messages",
+      "nextTemplates": [
+        "interactive-discover-1",
+        "interactive-discover-2"
+      ],
+      "nextTemplateProbabilities": [
+        0.5,
+        0.5
+      ],
+      "instantiationVariableTypeMap": {
+        "@type": "@json",
+        "@value": {
+          "message": "message"
+        }
+      },
+      "outputVariableTypeMap": {
+        "@type": "@json",
+        "@value": {
+          "creator": "person"
+        }
+      },      
+      "baseProbabilityTemplate": 0.2,
+      "minRefinementLength": 2,
+      "maxRefinementLength": 4,
+      "maxLogits": 10,
+      "templateFilePath": {
+        "@id": "urn:variables:query-templates:interactive-short-5.sparql",
+        "@type": "Variable"
+      },
+      "refinementPatternsFilePath": {
+        "@id": "urn:variables:query-refinements:interactive-short-5.json",
+        "@type": "Variable"
+      },
+      "variables": [
+        {
+          "@type": "VariableTemplateNamedNode",
+          "name": "message",
+          "valueTransformers": [
+            {
+              "@id": "urn:sparql-query-parameter-instantiator:valueTransformerCsvMapActivities"
+            }
+          ],
+          "substitutionProvider": {
+            "@id": "urn:sparql-query-parameter-instantiator:substitutionProviderMessageProbability",
+            "@type": "SubstitutionProviderUnionProbabilities",
+            "substitutionProviders": [
+              {
+                "@id": "urn:sparql-query-parameter-instantiator:substitutionProviderCommentProbability",
+                "@type": "SubstitutionProviderCsvSimilarityBasedProbability",
+                "csvFilePath": "out-fragments/parameters-comments.csv",
+                "csvFilePathSimilarities": "out-enhanced/parameters-similarities-comments.csv",
+                "columnName": "subject",
+                "columnNameSimilaritySubject": "person",
+                "separator": ";"
+              },
+              {
+                "@id": "urn:sparql-query-parameter-instantiator:substitutionProviderPostProbability",
+                "@type": "SubstitutionProviderCsvSimilarityBasedProbability",
+                "csvFilePath": "out-fragments/parameters-posts.csv",
+                "csvFilePathSimilarities": "out-enhanced/parameters-similarities-posts.csv",
+                "columnName": "subject",
+                "columnNameSimilaritySubject": "person",
+                "separator": ";"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
