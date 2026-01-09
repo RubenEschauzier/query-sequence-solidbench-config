@@ -1,5 +1,5 @@
 {
-  "@context": "https://linkedsoftwaredependencies.org/bundles/npm/rdf-dataset-fragmenter/^2.0.0/components/context.jsonld",
+  "@context": "https://linkedsoftwaredependencies.org/bundles/npm/@rubeneschauzier/rdf-dataset-fragmenter/^2.0.0/components/context.jsonld",
   "@id": "urn:rdf-dataset-fragmenter:default",
   "@type": "Fragmenter",
   "transformCallback": [
@@ -23,22 +23,22 @@
     }
   ],
   "quadSource": {
-	"@id": "urn:rdf-dataset-fragmenter:source:default",
-	"@type": "QuadSourceComposite",
-	"sources": [
-	  {
-	    "@type": "QuadSourceFile",
-	    "filePath": "out-snb/social_network/social_network_static_0_0.ttl"
-	  },
-	  {
-	    "@type": "QuadSourceFile",
-	    "filePath": "out-snb/social_network/social_network_person_0_0.ttl"
-	  },
-	  {
-	    "@type": "QuadSourceFile",
-	    "filePath": "out-snb/social_network/social_network_activity_0_0.ttl"
-	  }
-	]
+    "@id": "urn:rdf-dataset-fragmenter:source:default",
+    "@type": "QuadSourceComposite",
+    "sources": [
+      {
+        "@type": "QuadSourceFile",
+        "filePath": "out-snb/social_network/social_network_static_0_0.ttl"
+      },
+      {
+        "@type": "QuadSourceFile",
+        "filePath": "out-snb/social_network/social_network_person_0_0.ttl"
+      },
+      {
+        "@type": "QuadSourceFile",
+        "filePath": "out-snb/social_network/social_network_activity_0_0.ttl"
+      }
+    ]
   },
   "transformers": [
     {
@@ -464,7 +464,7 @@
     ]
   },
   "quadSink": {
-	"@id": "urn:rdf-dataset-fragmenter:sink:default",
+    "@id": "urn:rdf-dataset-fragmenter:sink:default",
     "@type": "QuadSinkComposite",
     "sinks": [
       {
@@ -531,6 +531,20 @@
         "sink": {
           "@type": "QuadSinkCsv",
           "file": "out-fragments/parameters-locations.csv",
+          "columns": [
+            "object"
+          ]
+        }
+      },
+      {
+        "@type": "QuadSinkFiltered",
+        "filter": {
+          "@type": "QuadMatcherPredicate",
+          "predicateRegex": "vocabulary/hasTag$"
+        },
+        "sink": {
+          "@type": "QuadSinkCsv",
+          "file": "out-fragments/parameters-tags.csv",
           "columns": [
             "object"
           ]

@@ -1,4 +1,4 @@
-node --max-old-space-size=8192 ../solidbench-user-sequences/bin/solidbench.js generate \
--e /home/reschauz/projects/simulated-user-query-sequences-benchmark/test-solidbench/configs/config-enhancer.json \
--f /home/reschauz/projects/simulated-user-query-sequences-benchmark/test-solidbench/configs/config-fragmenter.json \
--q /home/reschauz/projects/simulated-user-query-sequences-benchmark/test-solidbench/configs/config-queries.json \
+node --max-old-space-size=8192 ../../solidbench-user-sequences/bin/solidbench.js generate \
+-e ../configs/config-enhancer.json \
+-f ../configs/config-fragmenter.json \
+-q ../configs/config-queries.json 
