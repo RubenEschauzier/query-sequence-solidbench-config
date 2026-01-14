@@ -1,4 +1,4 @@
 node --max-old-space-size=8192 ../../solidbench-user-sequences/bin/solidbench.js generate \
 -e ../configs/config-enhancer.json \
 -f ../configs/config-fragmenter.json \
--q ../configs/config-queries-reduced.json 
+-q ../configs/config-queries-updated.json 
