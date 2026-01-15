@@ -16,11 +16,6 @@
     "temperature": 0.1,
     "findNextInstantiationValue": {
       "@type": "QueryNextInstantiatorValue",
-      "dataLocations": [
-        "out-snb/social_network/social_network_activity_0_0.ttl",
-        "out-snb/social_network/social_network_person_0_0.ttl",
-        "out-snb/social_network/social_network_static_0_0.ttl"
-      ],
       "termMappingTransformerFragmentedToOriginal": {
         "@type": "ValueTransformerCsvMap",
         "file": "out-fragments/transformed-activities.csv",
@@ -61,7 +56,17 @@
           "fragmentedString": "http://solidbench-server:3000/www.w3.org/2002/07/owl"
         }
       ],
-      "timeout": 120
+      "QLever": {
+        "@type": "QLeverInstance",
+        "imageName": "adfreiburg/qlever:latest",
+        "port": 7000,
+        "timeout": 60,
+        "dataLocations": [
+          "out-snb/social_network/social_network_activity_0_0.ttl",
+          "out-snb/social_network/social_network_person_0_0.ttl",
+          "out-snb/social_network/social_network_static_0_0.ttl"
+        ]
+      }
     }
   },
   "destinationFilePath": "out-queries/",
